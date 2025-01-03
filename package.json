@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.js",
+    "setup": "cp example.env .env"
+  },
+  "private": true,
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "discord.js": "^14.17.2",
+    "node-fetch": "^3.3.2"
+  }
+}
