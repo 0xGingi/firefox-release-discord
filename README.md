@@ -6,22 +6,23 @@ A Discord bot that monitors Firefox releases and notifies you when a new version
 
 ### Using Docker (Recommended)
 
-1. Clone the repository
+1. In a New Directory, Create your .env file and the data/ directory
 ```
-git clone https://github.com/0xgingi/firefox-release-discord
-cd firefox-release-discord
-```
-
-2. Copy the example.env file as .env
-```
-cp example.env .env
+mkdir firefox-release-discord
+touch .env
+mkdir data
 ```
 
-3. Edit `.env` with your Discord bot token and channel ID
+2. Edit `.env` with your Discord bot token and channel ID
 
-4. Run with Docker
+3. Run with Docker
 ```
-./docker.sh
+docker run -d \
+    --name firefox-release-bot \
+    --restart unless-stopped \
+    --env-file /path/to/.env \
+    -v "/path/to/data:/app/data" \
+    0xgingi/firefox-release-discord:latest
 ```
 
 ### Manual Setup
@@ -31,7 +32,7 @@ cp example.env .env
 bun install
 ```
 
-2. Configure your environment
+2. Copy your example.env as .env
 ```
 bun run setup
 ```
@@ -43,9 +44,10 @@ bun start
 
 ## Configuration
 
-Create a `.env` file with the following variables:
+Edit your `.env` file with the following variables:
 ```
 DISCORD_TOKEN=your_bot_token_here
 CHANNEL_ID=your_channel_id_here
-CHECK_INTERVAL=3600000  # Check interval in milliseconds (default: 1 hour)
+CHECK_INTERVAL=3600000
+FIREFOX_RELEASES_URL=https://www.mozilla.org/en-US/firefox/releases/ 
 ```
